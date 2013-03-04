@@ -3,7 +3,7 @@
 dl_name=mirall
 pkgname=owncloud-client
 pkgver=1.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="The ownCloud client software is based on Mirall and CSync"
 arch=('i686' 'x86_64')
 url="http://owncloud.org/sync-clients/"
@@ -17,7 +17,7 @@ source=("http://download.owncloud.com/download/${dl_name}-${pkgver}.tar.bz2"
 	"${pkgname}.desktop"
 	)
 md5sums=('7a3f3d927924392cffc9bb2fbbd85d19'
-         'e223d162626c2ff54efebaa90a182d81')
+         'd331e926873637a5ebeb8158402de4ea')
 
 build() {
 	if [[ -e ${srcdir}/${dl_name}-${pkgver}-build ]]; then
@@ -27,7 +27,8 @@ build() {
 	mkdir ${srcdir}/${dl_name}-${pkgver}-build
 	cd ${srcdir}/${dl_name}-${pkgver}-build
 	
-	cmake -DCMAKE_INSTALL_PREFIX=/usr \
+	cmake -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+	      -DCMAKE_INSTALL_PREFIX=/usr \
 	      -DCMAKE_INSTALL_LIBDIR=/usr/lib \
 	      -DCMAKE_BUILD_TYPE=Release \
 	      -DCSYNC_INCLUDE_PATH=/usr/include/ocsync \
