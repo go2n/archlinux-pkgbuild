@@ -1,7 +1,7 @@
 # Maintainer: Sarwo Hadi Setyana <sh.setyana@gmail.com>
 
 pkgname=plasmate-git
-pkgver=20130304
+pkgver=20130306
 pkgrel=1
 pkgdesc='A small IDE taylored for development of Plasma components, such as Widgets, Runners, Dataengines.'
 arch=('i686' 'x86_64')
@@ -31,7 +31,9 @@ build() {
 	mkdir -p build
 	cd build
 
-	cmake ../$_gitname -DQT_QT_INCLUDE_DIR=/usr/include/qt4/ -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release
+	cmake ../$_gitname -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+		-DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` \
+		-DCMAKE_BUILD_TYPE=Release
 	make
 }
 
