@@ -9,7 +9,7 @@ url='https://gitorious.org/xbmcremote'
 license=('GPL3')
 depends=('kdebase-workspace')
 makedepends=('git' 'cmake' 'automoc4')
-conflicts=kdeplasma-applets-xbmcremote-git
+conflicts=kdeplasma-applets-xbmcremote
 
 _gitroot="https://gitorious.org/xbmcremote/xbmcremote.git"
 _gitname="xbmcremote"
