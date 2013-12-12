@@ -1,4 +1,4 @@
-**ownCloud Testing**
+**ownCloud Testing (1.5.0rc1)**
 
 Pastikan build paket dan install ocsync terlebih dahulu sebelum membangun ownCloud client.
 
