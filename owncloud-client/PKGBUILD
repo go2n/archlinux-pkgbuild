@@ -2,21 +2,21 @@
 
 dl_name=mirall
 pkgname=owncloud-client
-pkgver=1.4.2
+pkgver=1.5.0
 pkgrel=1
 pkgdesc="The ownCloud client software is based on Mirall and CSync"
 arch=('i686' 'x86_64')
 url="http://owncloud.org/sync-clients/"
 license=('GPL2')
-depends=('qt4' 'ocsync')
+depends=('qt4' 'ocsync' 'qtkeychain')
 makedepends=('cmake')
 provides=('mirall' 'owncloud-client')
 conflicts=('mirall-git')
 install=owncloud-client.install
-source=("http://download.owncloud.com/download/${dl_name}-${pkgver}.tar.bz2"
+source=("http://download.owncloud.com/desktop/stable/${dl_name}-${pkgver}.tar.bz2"
 	"${pkgname}.desktop"
 	)
-md5sums=('089a9df66f31d6915a60e48ca4a027a8'
+md5sums=('b5298faab4ff22a3840afe7d2968e4c2'
          'd331e926873637a5ebeb8158402de4ea')
 
 build() {
