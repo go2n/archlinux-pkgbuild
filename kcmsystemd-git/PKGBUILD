@@ -1,0 +1,51 @@
+# Maintainer: Sarwo Hadi Setyana <sh.setyana@gmail.com>
+
+pkgname=kcmsystemd-git
+pkgver=20131208_645820b
+pkgrel=1
+pkgdesc="Systemd control module for KDE"
+arch=('i686' 'x86_64')
+url="https://github.com/rthomsen/kcmsystemd"
+license=('GPL')
+depends=('kdebase-workspace' 'boost-libs')
+conflicts=('kcmsystemd')
+
+_gitroot="https://github.com/rthomsen/kcmsystemd.git"
+_gitname="$pkgname"
+
+pkgver() {
+        cd "${_gitname}"
+        echo "$(git log -1 --format="%cd" --date=short | tr -d '-')_$(git log -1 --format="%h")"
+}
+
+build() {
+	cd "$srcdir"
+	msg "Connecting to GIT server..."
+        
+        if [ -d $_gitname ]; then
+                cd $_gitname
+                git pull origin
+                msg "The local files are updated."
+        else
+                git clone $_gitroot $_gitname
+                cd $_gitname
+        fi
+
+	msg="GIT checkout done or server timeout."
+	msg="Starting make..."
+	
+	if [ -d build ]; then
+		rm -r build
+	fi
+	
+	mkdir build
+	cd build
+	
+	cmake .. -DCMAKE_INSTALL_PREFIX=$(kde4-config --prefix) \
+		 -DCMAKE_BUILD_TYPE=Release
+}
+
+package() {
+	cd "$srcdir/$_gitname/build"
+	make DESTDIR=$pkgdir install
+}
