@@ -1,7 +1,7 @@
 # Maintainer: Sarwo Hadi Setyana <sh.setyana@gmail.com>
 
 pkgname=plasmate-git
-pkgver=20130306
+pkgver=r941.5196de2
 pkgrel=1
 pkgdesc='A small IDE taylored for development of Plasma components, such as Widgets, Runners, Dataengines.'
 arch=('i686' 'x86_64')
@@ -10,34 +10,30 @@ license=('LGPL')
 depends=('kdepimlibs')
 makedepends=('cmake' 'git' 'automoc4' 'boost')
 conflicts=('plasmate' 'plasmate-tools-git')
+source=("$pkgname"::'git://anongit.kde.org/plasmate')
+md5sums=('SKIP')
 
-_gitroot="git://anongit.kde.org/plasmate"
-_gitname="plasmate"
+pkgver() {
+	cd $pkgname
+	printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+}
+
 
 build() {
-	msg "Connecting to the GIT server..."
-
-	if [[ -d $srcdir/$_gitname ]]; then
-		cd $_gitname
-		git pull origin
-		msg "The local files are updated."
-	else
-		git clone $_gitroot
+	if [ -d build ]; then
+		rm -r build
 	fi
-
-	msg "GIT checkout done"
-	msg "Starting make..."
-	cd "${srcdir}"
+	
 	mkdir -p build
 	cd build
 
-	cmake ../$_gitname -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
+	cmake ../${pkgname} -DQT_QMAKE_EXECUTABLE=qmake-qt4 \
 		-DCMAKE_INSTALL_PREFIX=`kde4-config --prefix` \
 		-DCMAKE_BUILD_TYPE=Release
 	make
 }
 
 package() {
-	cd ${srcdir}/build
+	cd build
 	make DESTDIR=${pkgdir} install
 }
