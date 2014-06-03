@@ -1,0 +1,22 @@
+pkgbase = owncloud-client
+	pkgdesc = The ownCloud client software is based on Mirall and CSync
+	pkgver = 1.6.0
+	pkgrel = 1
+	url = http://owncloud.org/sync-clients/
+	install = owncloud-client.install
+	arch = i686
+	arch = x86_64
+	license = GPL2
+	makedepends = cmake
+	depends = qtkeychain
+	depends = qtwebkit
+	depends = neon
+	provides = mirall
+	provides = ocsync
+	conflicts = mirall-git
+	conflicts = ocsync
+	source = http://download.owncloud.com/desktop/stable/mirall-1.6.0.tar.bz2
+	backup = etc/ownCloud/sync-exclude.lst
+
+pkgname = owncloud-client
+
