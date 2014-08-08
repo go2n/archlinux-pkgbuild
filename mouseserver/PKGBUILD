@@ -3,7 +3,7 @@
 pkgname=mouseserver
 pkgsrc=mouseserver-sourcecode-Linux
 pkgver=1.0.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Mouse server for WiFi Mouse"
 arch=('i686' 'x86_64')
 url="http://wifimouse.necta.us/"
