@@ -2,20 +2,21 @@
 
 dl_name=mirall
 pkgname=owncloud-client
-pkgver=1.6.4
+pkgver=1.7.1
 pkgrel=1
 pkgdesc="The ownCloud client software is based on Mirall and CSync"
 arch=('i686' 'x86_64')
 url="http://owncloud.org/sync-clients/"
 license=('GPL2')
 depends=('qtkeychain' 'qtwebkit' 'neon')
-makedepends=('cmake')
+makedepends=('cmake' 'python-sphinx')
+optdepends=('python2-nautilus: integration with Nautilus')
 provides=('mirall' 'ocsync')
 conflicts=('mirall-git' 'ocsync')
 install=owncloud-client.install
 backup=('etc/ownCloud/sync-exclude.lst')
 source=("http://download.owncloud.com/desktop/stable/${dl_name}-${pkgver}.tar.bz2")
-md5sums=('9fae1bdbd7a248cbe32614f2a0a62906')
+md5sums=('5355f5dee2beb2d2dc39c8ad77511c0b')
 
 prepare() {
 	if [[ -e ${srcdir}/${dl_name}-${pkgver}-build ]]; then
@@ -34,6 +35,7 @@ build() {
 	      -DCMAKE_BUILD_TYPE=Release \
 	      -DCMAKE_INSTALL_SYSCONFDIR=/etc/${pkgname} ../${dl_name}-${pkgver}
 	make
+	make doc-man
 }
 
 package() {
