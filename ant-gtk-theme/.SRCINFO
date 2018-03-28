@@ -1,0 +1,12 @@
+pkgbase = ant-gtk-theme
+	pkgdesc = A flat and light theme with a modern look
+	pkgver = 1.1.0
+	pkgrel = 1
+	url = https://www.opendesktop.org/p/1099856/
+	arch = any
+	license = GPL3
+	source = https://dl.opendesktop.org/api/files/downloadfile/id/1521578697/s/65ef1e76484a2bb3d86e4cb501e3ad60/t/1522203329/u/366148/Ant.tar
+	sha256sums = d6517a2aaa476a53025021cf58776bb4bdbb3c247d8403a80c92658a977019d4
+
+pkgname = ant-gtk-theme
+
