@@ -1,17 +1,17 @@
 # Maintainer: Sarwo Hadi Setyana <sh.setyana@gmail.com>
 
 pkgname=dianara-git
-pkgver=r1355.c1924ac
+pkgver=r4129.69afead8
 pkgrel=1
 pkgdesc="Dianara is a pump.io social networking client."
 arch=('i686' 'x86_64')
 url="http://dianara.nongnu.org/"
 license=('GPL')
-depends=('qjson' 'qoauth' 'qca-ossl')
+depends=('hicolor-icon-theme' 'qt5-base' 'qoauth')
 makedepends=('git')
 install="dianara.install"
 conflicts=('dianara')
-source=("$pkgname"::'git+https://git.gitorious.org/dianara/dianara-dev.git')
+source=("$pkgname"::'git+https://gitlab.com/dianara/dianara-dev.git')
 md5sums=('SKIP')
 
 pkgver() {
@@ -21,20 +21,31 @@ pkgver() {
 
 build() {
 	cd $pkgname
-	qmake-qt4
+	qmake Dianara.pro
 	make
 }
 
 package() {
 	cd "$pkgname"
-
-	install -Dm755 dianara "$pkgdir/usr/bin/dianara"
+	
+	make INSTALL_ROOT="${pkgdir}" install
 
 	install -Dm644 dianara.desktop "$pkgdir/usr/share/applications/dianara.desktop"
 
 	install -Dm644 icon/32x32/dianara.png "$pkgdir/usr/share/icons/hicolor/32x32/apps/dianara.png"
 	install -Dm644 icon/64x64/dianara.png "$pkgdir/usr/share/icons/hicolor/64x64/apps/dianara.png"
-
-	install -d "$pkgdir/usr/share/locale"
-	install -Dm644 translations/*.qm "$pkgdir/usr/share/locale"
+	
+	install -d "${pkgdir}/usr/share/${pkgname}/translations"
+	install -Dm644 translations/* "${pkgdir}/usr/share/${pkgname}/translations"
+	
+	install -Dm644 BUGS "${pkgdir}/usr/share/doc/${pkgname}/BUGS"
+	install -Dm644 CHANGELOG "${pkgdir}/usr/share/doc/${pkgname}/CHANGELOG"
+	install -Dm644 INSTALL "${pkgdir}/usr/share/doc/${pkgname}/INSTALL"
+	install -Dm644 README "${pkgdir}/usr/share/doc/${pkgname}/README"
+	install -Dm644 TODO "${pkgdir}/usr/share/doc/${pkgname}/TODO"
+	install -Dm644 TRANSLATING "${pkgdir}/usr/share/doc/${pkgname}/TRANSLATING"
+	
+	install -Dm644 LICENSE "${pkgdir}/usr/share/license/${pkgname}/LICENSE"
+	
+	install -Dm644 manual/dianara.1 "${pkgdir}/usr/share/man/man1/dianara.1"
 }
