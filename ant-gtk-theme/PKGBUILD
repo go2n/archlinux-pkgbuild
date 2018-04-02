@@ -8,8 +8,8 @@ arch=(any)
 url=https://www.opendesktop.org/p/1099856/
 license=('GPL3')
 depends=()
-source=("https://dl.opendesktop.org/api/files/downloadfile/id/1521578697/s/65ef1e76484a2bb3d86e4cb501e3ad60/t/1522203329/u/366148/Ant.tar")
-sha256sums=('d6517a2aaa476a53025021cf58776bb4bdbb3c247d8403a80c92658a977019d4')
+source=("https://github.com/EliverLara/Ant/archive/v1.1.0.tar.gz")
+sha256sums=('79cbf36368592fb005f024076a924518695daee703635dc576a3a9d622f0381d')
 
 package(){
 	cd "$srcdir"
