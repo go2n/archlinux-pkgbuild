@@ -1,0 +1,25 @@
+# Maintainer: Sarwo Hadi Setyana <sh.setyana@gmail.com>
+
+pkgname=python-pyfas
+pyname=pyfas
+pkgver=0.3.1
+pkgrel=1
+pkgdesc="Pyfas is a python toolbox for flow assurance engineers"
+arch=(any)
+url="https://github.com/gpagliuca/pyfas"
+license=('GPL3')
+depends=('python-sphinx' 'python-openpyxl' 'jupyter>=1.0.0' 'python-quantities>=0.11.1' 'ipython>=4.0' 'python-nbsphinx>=0.2' 'python-pandas')
+makedepends=('git' 'python>=3.6')
+conflicts=('python-pyfas-git')
+source=("https://pypi.python.org/packages/source/${pyname:0:1}/${pyname}/${pyname}-${pkgver}.tar.gz")
+md5sums=('e44580a4799c5251b5899278459b54d1')
+
+build() {
+    cd "${pyname}-${pkgver}"
+    python setup.py build
+}
+
+package() {
+    cd "${pyname}-${pkgver}"
+    python setup.py install --root="$pkgdir/" --optimize=1 --skip-build
+}
